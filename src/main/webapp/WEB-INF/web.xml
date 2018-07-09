@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app
+  xmlns="http://java.sun.com/xml/ns/javaee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" 
+  version="3.0"
+>
+
+	<mvc:annotation-driven />
+
+	<mvc:resources mapping="/css/**" location="/WEB-INF/lib/css/" />
+	<mvc:resources mapping="/image/**" location="/WEB-INF/lib/image/" />
+	<mvc:resources mapping="/js/**" location="/WEB-INF/lib/js/" />
+
+	  
+	<context:component-scan base-package="api" />
+
+
+</web-app>

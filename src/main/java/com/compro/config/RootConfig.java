@@ -18,55 +18,8 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 
 @Configuration
-@EnableTransactionManagement
-@ComponentScan(
-		basePackages={
-				"com.compro",
-				},
-		excludeFilters={
-				@ComponentScan.Filter(type=FilterType.ANNOTATION, value=EnableWebMvc.class)}
-)
+@ComponentScan
 public class RootConfig {
 
-	@Bean
-	public DataSource dataSource(){
-		DriverManagerDataSource dSource = new DriverManagerDataSource();
-		dSource.setDriverClassName("com.mysql.jdbc.Driver");
-		dSource.setUrl("jdbc:mysql://127.0.0.1:3306/srect?useUnicode=true&characterEncoding=utf8");
-		dSource.setUsername("root");
-		dSource.setPassword("root");
-		return dSource;
-	}
-	
-	@Bean(name="sessionFactory")
-	public LocalSessionFactoryBean sessionFactory(){
-		LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
-		sessionFactoryBean.setDataSource(dataSource());
-		sessionFactoryBean.setPackagesToScan(
-				"com.spittr.model",
-				"com.spittr.user.model", 
-				"com.spittr.authorization.model",
-				"com.spittr.message.model",
-				"com.spittr.image.model",
-				"com.spittr.location.model",
-				"com.spittr.websocket.model"
-				);
-
-		Properties hibernateProperties = new Properties();
-		hibernateProperties.put("hibernate.dialect", "com.spittr.config.MySQLDialectUTF8");
-        	hibernateProperties.put("hibernate.show_sql", "true");
-
-        	hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "update");  
-        	sessionFactoryBean.setHibernateProperties(hibernateProperties);
-        return sessionFactoryBean;
-	}
-	
-	@Bean
-	@Autowired
-	public HibernateTransactionManager transactionManager(SessionFactory sessionFactory){
-		HibernateTransactionManager transactionManager = new HibernateTransactionManager();
-		transactionManager.setSessionFactory(sessionFactory);
-		return transactionManager;
-	}
-	
 }
+	

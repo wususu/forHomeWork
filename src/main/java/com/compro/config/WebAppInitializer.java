@@ -7,13 +7,15 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 
 import com.compro.filter.CharacterEncodingUTF8Filter;
 
-public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
+public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer  {
 
-	@Override
-	protected Class<?>[] getRootConfigClasses() {
-		// TODO Auto-generated method stub
-		return new Class[0];
+	{
+		System.out.println("-------------------------------");
 	}
+	
+    protected Class<?>[] getRootConfigClasses() {
+        return new Class[]{RootConfig.class};
+    }
 
 	@Override
 	protected Class<?>[] getServletConfigClasses() {
