@@ -8,7 +8,7 @@ import com.compro.entity.MultiMans;
 import com.compro.model.ResponseModel;
 
 @RestController
-@RequestMapping(value="/muti")
+@RequestMapping(value="/multi")
 public class MultiInstanceController {
 	
 	@RequestMapping(value="/getById.do")

@@ -2,9 +2,331 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>综合实验</title>
+<script type="text/javascript" src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
 </head>
 <body>
-<p>Hello World</p>
+<div id="bottons">
+	<div>
+		<input type="button" value="单例模式" id="single-button">
+	</div>
+	
+	<div>
+		<input type="button" value="多例模式" id="multi-button">
+	</div>
+	
+	<div>
+		<input type="button" value="接口编程" id="inter-button">
+	</div>
+	
+	<div>
+		<input type="button" value="简单工厂模式" id="simpleFty-button">
+	</div>
+	
+	<div>
+		<input type="button" value="工厂方法模式" id="methodFty-button">
+	</div>
+	
+	<div>
+		<input type="button" value="抽象工厂模式" id="abstractFty-button">
+	</div>
+	
+	<div>
+		<input type="button" value="类适配器模式" id="clazzAdapter-button">
+	</div>
+	
+	<div>
+		<input type="button" value="对象适配器模式" id="objAdapter-button">
+	</div>
+</div>
+<div id="homePage">
+    <div id="pic">
+        <img src="#"></a>
+    </div>
+    <div id="info">
+        <p id="name"></p>
+        <p id="id"></p>
+    </div>
+</div>
+
+<div id="signlePage">
+
+    <div>
+        <p>单例对象的值为:</p>
+        <div id="single-result"></div>
+    </div>
+
+    <div>
+        <input type="text" name="设置对象的值" id="setSingleVal"/>
+        <input type="button" value="设置单例对象" id="submitSingal"/>
+    </div>
+
+    <div>
+        <input type="button" value="显示对象" id="showSingle">
+    </div>
+
+</div>
+
+<div id="multiPage">
+    <div>
+        <p>多例对象的值为:</p>
+        <div id="multi-result"></div>
+    </div>
+
+    <div>
+        <input type="button" value="显示对象" id="showMulti">
+    </div>
+</div>
+
+<div id="interPage">
+
+    <div>
+        <p>叫声:</p>
+        <div id="inter-result"></div>
+    </div>
+    <div>
+        <p>设置对象值:(cat/dog)</p>
+        <input type="text" name="设置对象的值" id="setInterType"/>
+    </div>
+
+    <div>
+        <input type="button" value="输出叫声" id="showInter">
+    </div>
+
+</div>
+
+<div id="simpleFtyPage">
+    <div>
+        <p>英雄对象:</p>
+        <div id="simpleFty-result"></div>
+    </div>
+    <div>
+        <p>选择超级英雄:(IronMan/BlackWidow)</p>
+        <input type="text" name="设置对象的值" id="setHero"/>
+    </div>
+
+    <div>
+        <input type="button" value="输出英雄对象" id="showSimpleFty">
+    </div>
+</div>
+
+<div id="methodFtyPage">
+    <div>
+        <p>武器产品对象:</p>
+        <div id="methodFty-result"></div>
+    </div>
+
+    <div>
+        <input type="button" value="输出小刀产品" id="showKnift">
+        <input type="button" value="输出手枪产品" id="showGun">
+
+    </div>
+</div>
+
+<div id="abstractFtyPage">
+     <div>
+        <p>输出角色对象:</p>
+        <div id="abstractFty-result"></div>
+    </div>
+
+    <div>
+        <input type="button" value="输出战士对象" id="showWarrier">
+        <input type="button" value="输出弓手对象" id="showArcher">
+
+    </div>
+</div>
+
+<div id="clazzAdapterPage">
+    <div>
+        <p>输出人物对象:</p>
+        <div id="clazzAdapter-result"></div>
+    </div>
+
+    <div>
+        <input type="button" value="输出人物对象" id="showClazzAdapter">
+    </div>
+</div>
+
+<div id="objAdapterPage">
+    <div>
+        <p>输出人物对象:</p>
+        <div id="objAdapter-result"></div>
+    </div>
+
+    <div>
+        <input type="button" value="输出人物对象" id="showObjAdapter">
+    </div>
+</div>
+
 </body>
+<script type="text/javascript">
+
+    $(document).ready(function(){
+
+        function init(){
+			$("div#homePage").show();
+            $.get("info/me.do",function(data){
+                console.log(data);
+                $("div>p#id").html(data.content.id);
+                $("div>p#name").html(data.content.name);
+                $("div#pic img").attr("src", "http://"+window.location.host + data.content.photoPath);
+            });
+        }
+        
+        function hideAll() {
+			$("div#homePage").hide();
+			$("div#signlePage").hide();
+			$("div#multiPage").hide();
+			$("div#interPage").hide();
+			$("div#simpleFtyPage").hide();
+			$("div#methodFtyPage").hide();
+			$("div#abstractFtyPage").hide();
+			$("div#clazzAdapterPage").hide();
+			$("div#objAdapterPage").hide();
+		}
+        
+        function ckSingleButton() {
+			$("input#single-button").click(function(){
+				hideAll();
+                $("div#signlePage").show();
+
+                $("input#showSingle").click(function(){
+                    $.get("sgln/get.do", function(data){
+                        $("div#single-result ").html(JSON.stringify(data.content));
+                    });
+                });
+
+                $("input#submitSingal").click(function(){
+                    var value = $("input#setSingleVal").val();
+                    $.get("sgln/set.do/" + value,function(data){
+                        if(data.code == 200){
+                            alert("success");
+                        }else{
+                            alert("error");
+                        }
+                    });
+                });
+			});
+		}
+        
+        function ckMultiButton(){
+            $("input#multi-button").click(function(){
+                hideAll();
+                $("div#multiPage").show();
+                $("input#showMulti").click(function(){
+                    $.get("multi/getByRandom.do", function(data){
+                        $("div#multi-result ").html(JSON.stringify(data.content));
+                    });
+                })
+            });
+
+        }
+
+        function ckInterButton(){
+            $("input#inter-button").click(function(){
+				hideAll();
+                $("div#interPage").show();
+
+                $("input#showInter").click(function(){
+                    var value = $("input#setInterType").val();
+
+                    $.get("inter/say.do/"+value, function(data){
+                        $("div#inter-result ").html(JSON.stringify(data.content));
+                    });
+                });
+			});
+        }
+
+        function ckSimpleFtyButton(){
+            $("input#simpleFty-button").click(function(){
+				hideAll();
+                $("div#simpleFtyPage").show();
+
+                $("input#showSimpleFty").click(function(){
+                    var value = $("input#setHero").val();
+
+                    $.get("simpfty/getByName.do/"+value, function(data){
+                        $("div#simpleFty-result").html(JSON.stringify(data.content));
+                    });
+                });
+			});
+        }
+
+        function ckMethodFtyButton(){
+            $("input#methodFty-button").click(function(){
+				hideAll();
+                $("div#methodFtyPage").show();
+
+                $("input#showKnift").click(function(){
+                    $.get("fty/knift.do/", function(data){
+                        $("div#methodFty-result").html(JSON.stringify(data.content));
+                    });
+                });
+
+                $("input#showGun").click(function(){
+                    $.get("fty/gun.do/", function(data){
+                        $("div#methodFty-result").html(JSON.stringify(data.content));
+                    });
+                });
+			});        
+        }
+
+        function chAbstractFtyButton(){
+            $("input#abstractFty-button").click(function(){
+				hideAll();
+                $("div#abstractFtyPage").show();
+
+                $("input#showWarrier").click(function(){
+                    $.get("abstractFty/getWarrier.do/", function(data){
+                        $("div#abstractFty-result").html(JSON.stringify(data.content));
+                    });
+                });
+
+                $("input#showArcher").click(function(){
+                    $.get("abstractFty/getArcher.do/", function(data){
+                        $("div#abstractFty-result").html(JSON.stringify(data.content));
+                    });
+                });
+			});        
+        }
+
+        function ckClazzAdapterButton(){
+            $("input#clazzAdapter-button").click(function(){
+				hideAll();
+                $("div#clazzAdapterPage").show();
+
+                $("input#showClazzAdapter").click(function(){
+                    $.get("cAdapter/get.do/", function(data){
+                        $("div#clazzAdapter-result").html(JSON.stringify(data.content));
+                    });
+                });
+            });
+        }
+
+        function ckObjAdapterButton(){
+            $("input#objAdapter-button").click(function(){
+				hideAll();
+                $("div#objAdapterPage").show();
+
+                $("input#showObjAdapter").click(function(){
+                    $.get("objAdapter/get.do/", function(data){
+                        $("div#objAdapter-result").html(JSON.stringify(data.content));
+                    });
+                });
+            });
+        }
+
+        hideAll();
+        init();
+        ckSingleButton();
+        ckMultiButton();
+        ckInterButton();
+        ckSimpleFtyButton();
+        ckMethodFtyButton();
+        chAbstractFtyButton();
+        ckClazzAdapterButton();
+        ckObjAdapterButton();
+    });
+
+</script>
 </html>

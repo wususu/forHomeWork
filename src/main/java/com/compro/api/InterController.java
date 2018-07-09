@@ -13,7 +13,7 @@ import com.compro.model.ResponseModel;
 @RequestMapping(value="/inter")
 public class InterController {
 	
-	@RequestMapping(value="/say.do")
+	@RequestMapping(value="/say.do/{type}")
 	public ResponseModel say(@PathVariable("type")String type) {
 		Say say;
 		if (type.equals("cat")) {

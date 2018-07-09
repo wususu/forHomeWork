@@ -11,8 +11,9 @@ import com.compro.model.ResponseModel;
 @RequestMapping(value="/simpfty")
 public class SimpleFactoryController {
 
-	@RequestMapping(value="getByName.do")
+	@RequestMapping(value="getByName.do/{name}")
 	public ResponseModel getHero(@PathVariable("name")String name) {
+		System.out.println(name);
 		if (name.trim() != "") {
 			return ResponseModel.SUCCESS(SimpleFactory.getHero(name));
 		}

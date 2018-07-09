@@ -18,10 +18,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 		})
 public class WebConfig extends WebMvcConfigurerAdapter{
 
-	{
-		
-		System.out.println("11111111111111111111111111111111111111");
-	}
 	
 	 @Override
 	    public void configureDefaultServletHandling(

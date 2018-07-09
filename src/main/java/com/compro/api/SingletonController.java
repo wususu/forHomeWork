@@ -1,5 +1,6 @@
 package com.compro.api;
 
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -10,8 +11,8 @@ import com.compro.model.ResponseModel;
 @RequestMapping(value="/sgln")
 public class SingletonController {
 	
-	@RequestMapping(value="/set.do")
-	public ResponseModel setSingleMan(String name) {
+	@RequestMapping(value="/set.do/{name}")
+	public ResponseModel setSingleMan(@PathVariable("name")String name) {
 		if (name != null && name.trim() != "") {
 			SingleMan.getInstance().setName(name);
 			return ResponseModel.SUCCESS("OJBK");
